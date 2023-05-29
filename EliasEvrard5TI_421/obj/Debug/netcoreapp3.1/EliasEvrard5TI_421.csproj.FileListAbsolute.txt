@@ -1,0 +1,14 @@
+C:\Users\eleva\OneDrive\Documents\École\5TTI\Informatique\Informatique\UAA9_421_EvrardElias_2023\421\EliasEvrard5TI_421\bin\Debug\netcoreapp3.1\EliasEvrard5TI_421.exe
+C:\Users\eleva\OneDrive\Documents\École\5TTI\Informatique\Informatique\UAA9_421_EvrardElias_2023\421\EliasEvrard5TI_421\bin\Debug\netcoreapp3.1\EliasEvrard5TI_421.deps.json
+C:\Users\eleva\OneDrive\Documents\École\5TTI\Informatique\Informatique\UAA9_421_EvrardElias_2023\421\EliasEvrard5TI_421\bin\Debug\netcoreapp3.1\EliasEvrard5TI_421.runtimeconfig.json
+C:\Users\eleva\OneDrive\Documents\École\5TTI\Informatique\Informatique\UAA9_421_EvrardElias_2023\421\EliasEvrard5TI_421\bin\Debug\netcoreapp3.1\EliasEvrard5TI_421.runtimeconfig.dev.json
+C:\Users\eleva\OneDrive\Documents\École\5TTI\Informatique\Informatique\UAA9_421_EvrardElias_2023\421\EliasEvrard5TI_421\bin\Debug\netcoreapp3.1\EliasEvrard5TI_421.dll
+C:\Users\eleva\OneDrive\Documents\École\5TTI\Informatique\Informatique\UAA9_421_EvrardElias_2023\421\EliasEvrard5TI_421\bin\Debug\netcoreapp3.1\EliasEvrard5TI_421.pdb
+C:\Users\eleva\OneDrive\Documents\École\5TTI\Informatique\Informatique\UAA9_421_EvrardElias_2023\421\EliasEvrard5TI_421\obj\Debug\netcoreapp3.1\EliasEvrard5TI_421.csproj.AssemblyReference.cache
+C:\Users\eleva\OneDrive\Documents\École\5TTI\Informatique\Informatique\UAA9_421_EvrardElias_2023\421\EliasEvrard5TI_421\obj\Debug\netcoreapp3.1\EliasEvrard5TI_421.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\eleva\OneDrive\Documents\École\5TTI\Informatique\Informatique\UAA9_421_EvrardElias_2023\421\EliasEvrard5TI_421\obj\Debug\netcoreapp3.1\EliasEvrard5TI_421.AssemblyInfoInputs.cache
+C:\Users\eleva\OneDrive\Documents\École\5TTI\Informatique\Informatique\UAA9_421_EvrardElias_2023\421\EliasEvrard5TI_421\obj\Debug\netcoreapp3.1\EliasEvrard5TI_421.AssemblyInfo.cs
+C:\Users\eleva\OneDrive\Documents\École\5TTI\Informatique\Informatique\UAA9_421_EvrardElias_2023\421\EliasEvrard5TI_421\obj\Debug\netcoreapp3.1\EliasEvrard5TI_421.csproj.CoreCompileInputs.cache
+C:\Users\eleva\OneDrive\Documents\École\5TTI\Informatique\Informatique\UAA9_421_EvrardElias_2023\421\EliasEvrard5TI_421\obj\Debug\netcoreapp3.1\EliasEvrard5TI_421.dll
+C:\Users\eleva\OneDrive\Documents\École\5TTI\Informatique\Informatique\UAA9_421_EvrardElias_2023\421\EliasEvrard5TI_421\obj\Debug\netcoreapp3.1\EliasEvrard5TI_421.pdb
+C:\Users\eleva\OneDrive\Documents\École\5TTI\Informatique\Informatique\UAA9_421_EvrardElias_2023\421\EliasEvrard5TI_421\obj\Debug\netcoreapp3.1\EliasEvrard5TI_421.genruntimeconfig.cache

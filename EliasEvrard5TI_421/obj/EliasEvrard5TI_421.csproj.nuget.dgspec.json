@@ -1,23 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "H:\\UAA11\\EliasEvrard_421\\EliasEvrard5TI_421\\EliasEvrard5TI_421\\EliasEvrard5TI_421.csproj": {}
+    "C:\\Users\\eleva\\OneDrive\\Documents\\École\\5TTI\\Informatique\\Informatique\\UAA9_421_EvrardElias_2023\\421\\EliasEvrard5TI_421\\EliasEvrard5TI_421.csproj": {}
   },
   "projects": {
-    "H:\\UAA11\\EliasEvrard_421\\EliasEvrard5TI_421\\EliasEvrard5TI_421\\EliasEvrard5TI_421.csproj": {
+    "C:\\Users\\eleva\\OneDrive\\Documents\\École\\5TTI\\Informatique\\Informatique\\UAA9_421_EvrardElias_2023\\421\\EliasEvrard5TI_421\\EliasEvrard5TI_421.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "H:\\UAA11\\EliasEvrard_421\\EliasEvrard5TI_421\\EliasEvrard5TI_421\\EliasEvrard5TI_421.csproj",
+        "projectUniqueName": "C:\\Users\\eleva\\OneDrive\\Documents\\École\\5TTI\\Informatique\\Informatique\\UAA9_421_EvrardElias_2023\\421\\EliasEvrard5TI_421\\EliasEvrard5TI_421.csproj",
         "projectName": "EliasEvrard5TI_421",
-        "projectPath": "H:\\UAA11\\EliasEvrard_421\\EliasEvrard5TI_421\\EliasEvrard5TI_421\\EliasEvrard5TI_421.csproj",
-        "packagesPath": "C:\\Users\\190353.asty-moulin\\.nuget\\packages\\",
-        "outputPath": "H:\\UAA11\\EliasEvrard_421\\EliasEvrard5TI_421\\EliasEvrard5TI_421\\obj\\",
+        "projectPath": "C:\\Users\\eleva\\OneDrive\\Documents\\École\\5TTI\\Informatique\\Informatique\\UAA9_421_EvrardElias_2023\\421\\EliasEvrard5TI_421\\EliasEvrard5TI_421.csproj",
+        "packagesPath": "C:\\Users\\eleva\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\eleva\\OneDrive\\Documents\\École\\5TTI\\Informatique\\Informatique\\UAA9_421_EvrardElias_2023\\421\\EliasEvrard5TI_421\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\190353.asty-moulin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\eleva\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -25,6 +26,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -48,7 +50,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -57,7 +60,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.409\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.103\\RuntimeIdentifierGraph.json"
         }
       }
     }
