@@ -19,7 +19,11 @@ namespace EliasEvrard5TI_421
 
                 outils.LireEntier("Combien de joueur sont présent ?", out nbrJoueur);
                 Joueur[] mesJoueurs = new Joueur[nbrJoueur];
-                outils.Identification(nbrJoueur, out mesJoueurs);
+                for (int compteur = 0; compteur < nbrJoueur; compteur++)
+                {
+                    mesJoueurs[compteur].score = new int[3];
+                }
+                outils.Identification(nbrJoueur, ref mesJoueurs);
                 do
                 {
                     Console.WriteLine("Maintenant que tout le monde est prêt le jeu peut commencer !");

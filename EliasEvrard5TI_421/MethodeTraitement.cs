@@ -7,12 +7,6 @@ using System.Text;
 
 namespace EliasEvrard5TI_421
 {
-    public struct Joueur
-    {
-        public int jetonJoueur;
-        public string pseudo;
-        public int[] score;
-    }
 
     public struct MethodeTraitement
     {
@@ -27,11 +21,10 @@ namespace EliasEvrard5TI_421
 
         }
 
-        public void Identification(int nbrJoueur, out Joueur[] mesJoueurs)
+        public void Identification(int nbrJoueur, ref Joueur[] mesJoueurs)
         {
             string bonPseudo;
             bool ouiNon;
-            mesJoueurs = new Joueur[nbrJoueur];
             for (int compteur = 1; compteur < nbrJoueur + 1; compteur++)
             {
                 do
@@ -67,17 +60,14 @@ namespace EliasEvrard5TI_421
 
         public void TriDes(int lanceur, ref Joueur[] mesJoueurs)
         {
-            int passage = 0;
             bool permut = false;
             int verre;
-
-
             do
             {
                 permut = false;
-                for (int compteur = 0; compteur <= mesJoueurs[lanceur].score.Length - passage; compteur++)
+                for (int compteur = 0; compteur < mesJoueurs[lanceur].score.Length - 1; compteur++)
                 {
-                    if (mesJoueurs[lanceur].score[compteur] > mesJoueurs[lanceur].score[compteur + 1])
+                    if (mesJoueurs[lanceur].score[compteur] < mesJoueurs[lanceur].score[compteur + 1])
                     {
                         verre = mesJoueurs[lanceur].score[compteur];
                         mesJoueurs[lanceur].score[compteur] = mesJoueurs[lanceur].score[compteur + 1];
@@ -85,7 +75,6 @@ namespace EliasEvrard5TI_421
                         permut = true;
                     }
                 }
-                passage = passage + 1;
             } while (permut == true);
         }
 
@@ -97,11 +86,12 @@ namespace EliasEvrard5TI_421
                 for (int compteurJoueur = 0; compteurJoueur < nbrJoueur; compteurJoueur++)
                 {
                     int lanceur = compteurJoueur;
-                    Console.WriteLine("À toi de jouer" + mesJoueurs[compteurJoueur].pseudo);
+                    Console.WriteLine("À toi de jouer " + mesJoueurs[compteurJoueur].pseudo);
+                    //Console.ReadLine();
                     Lancer(lanceur, ref mesJoueurs);
                     TriDes(lanceur, ref mesJoueurs);
                     ConcatenationDe(lanceur, mesJoueurs, out string score);
-                    Console.WriteLine("Voici votre score :" + score);
+                    Console.WriteLine("Voici votre score : " + score);
                 }
                 mesJoueurs = mesJoueurs.OrderByDescending(joueur => joueur.score.Max()).ToArray();
                 DonnerJetonCharge(nbrJoueur, ref jeton, ref mesJoueurs);
@@ -113,6 +103,7 @@ namespace EliasEvrard5TI_421
             string relancerDe;
             bool ouiNon = true;
             string dernierLancer;
+            bool finPartie = true;
             int nombreLancer = 3;
             do
             {
@@ -121,11 +112,12 @@ namespace EliasEvrard5TI_421
                     for (int compteurJoueur = 0; compteurJoueur < mesJoueurs.Length - 1; compteurJoueur++)
                     {
                         int lanceur = compteurJoueur;
-                        Console.WriteLine("C'est au tour de" + mesJoueurs[compteurJoueur].pseudo + ".");
+                        Console.WriteLine("C'est au tour de " + mesJoueurs[compteurJoueur].pseudo + ".");
+                        Console.ReadLine();
                         Lancer(lanceur, ref mesJoueurs);
                         TriDes(lanceur, ref mesJoueurs);
                         ConcatenationDe(lanceur, mesJoueurs, out string score);
-                        Console.WriteLine("Voici votre score :" + score);
+                        Console.WriteLine("Voici votre score : " + score);
                         if (nombreLancer > 1)
                         {
                             do
@@ -137,7 +129,7 @@ namespace EliasEvrard5TI_421
                                     Relancer(lanceur, ref mesJoueurs);
                                     TriDes(lanceur, ref mesJoueurs);
                                     ConcatenationDe(lanceur, mesJoueurs, out score);
-                                    Console.WriteLine("Voici votre score :" + score);
+                                    Console.WriteLine("Voici votre score : " + score);
                                     if (nombreLancer > 2)
                                     {
                                         do
@@ -149,7 +141,7 @@ namespace EliasEvrard5TI_421
                                                 Relancer(lanceur, ref mesJoueurs);
                                                 TriDes(lanceur, ref mesJoueurs);
                                                 ConcatenationDe(lanceur, mesJoueurs, out score);
-                                                Console.WriteLine("Voici votre score :" + score);
+                                                Console.WriteLine("Voici votre score : " + score);
                                                 ouiNon = true;
                                             }
                                             else if (dernierLancer == "Non")
@@ -162,11 +154,11 @@ namespace EliasEvrard5TI_421
                                                 Console.WriteLine("Veuillez répondre uniquement par Oui ou par Non.");
                                                 ouiNon = false;
                                             }
-                                        } while (true);
+                                        } while (ouiNon == false);
                                     }
 
                                 }
-                                else if (relancerDe != "Non")
+                                else if (relancerDe == "Non")
                                 {
                                     nombreLancer = 1;
                                     ouiNon = true;
@@ -176,14 +168,25 @@ namespace EliasEvrard5TI_421
                                     Console.WriteLine("Veuillez répondre uniquement par Oui ou par Non.");
                                     ouiNon = false;
                                 }
-                            } while (ouiNon == true);
+                            } while (ouiNon == false);
                         }
 
                     }
                 }
                 mesJoueurs = mesJoueurs.OrderByDescending(joueur => joueur.score.Max()).ToArray();
                 DonnerJetonDeharge(nbrJoueur, ref mesJoueurs);
-            } while (mesJoueurs[nbrJoueur - 1].jetonJoueur == 21);
+                for (int compteurJeton = 0; compteurJeton < nbrJoueur; compteurJeton++)
+                {
+                    if (mesJoueurs[compteurJeton].jetonJoueur == 21)
+                    {
+                        finPartie = true;
+                    }
+                    else
+                    {
+                        finPartie = false;
+                    }
+                }
+            } while (finPartie == false);
         }
 
         /*public void TriScore(int nbrJoueur, ref Joueur[] mesJoueurs)
@@ -224,19 +227,19 @@ namespace EliasEvrard5TI_421
 
                 if (changer == "Oui")
                 {
-                    for (int compteurChanger = 0; compteurChanger <= 3; compteurChanger++)
+                    for (int compteurChanger = 0; compteurChanger < 3; compteurChanger++)
                     {
                         do
                         {
-                            Console.WriteLine("Voulez-vous garder de coté le dé contenant la valeur" + mesJoueurs[lanceur].score[compteurChanger] + "?");
+                            Console.WriteLine("Voulez-vous garder de coté le dé contenant la valeur " + mesJoueurs[lanceur].score[compteurChanger] + "?");
                             relancer = Console.ReadLine();
                             if (relancer == "Oui")
                             {
-                                mesJoueurs[lanceur].score[compteurChanger] = desRelancer.Next(1, 7);
                                 ouiNon = true;
                             }
                             else if (relancer == "Non")
                             {
+                                mesJoueurs[lanceur].score[compteurChanger] = desRelancer.Next(1, 7);
                                 ouiNon = true;
                             }
                             else
@@ -244,7 +247,7 @@ namespace EliasEvrard5TI_421
                                 Console.WriteLine("Veuillez répondre uniquement par Oui ou Non");
                                 ouiNon = false;
                             }
-                        } while (ouiNon == true);
+                        } while (ouiNon == false);
                     }
                     ouiNon = true;
                 }
@@ -261,7 +264,7 @@ namespace EliasEvrard5TI_421
                     Console.WriteLine("Veuillez répondre uniquement par Oui ou Non");
                     ouiNon = false;
                 }
-            } while (ouiNon == true);
+            } while (ouiNon == false);
         }
 
         public void DonnerJetonDeharge(int nbrJoueur, ref Joueur[] mesJoueurs)
@@ -269,13 +272,13 @@ namespace EliasEvrard5TI_421
             int jetonDonner = 0;
             if (mesJoueurs[nbrJoueur - 1].score[1] == 421)
             {
-                Console.WriteLine(mesJoueurs[0].pseudo + "va recevoir tout les jetons de " + mesJoueurs[nbrJoueur - 1].pseudo + ".");
+                Console.WriteLine(mesJoueurs[0].pseudo + " va recevoir tout les jetons de " + mesJoueurs[nbrJoueur - 1].pseudo + ".");
                 mesJoueurs[0].jetonJoueur = mesJoueurs[0].jetonJoueur + mesJoueurs[nbrJoueur - 1].jetonJoueur;
                 mesJoueurs[nbrJoueur - 1].jetonJoueur = 0;
             }
             else if (mesJoueurs[nbrJoueur - 1].score[1] == 111)
             {
-                Console.WriteLine(mesJoueurs[0].pseudo + "va recevoir 7 jetons de la part de " + mesJoueurs[nbrJoueur - 1].pseudo + ".");
+                Console.WriteLine(mesJoueurs[0].pseudo + " va recevoir 7 jetons de la part de " + mesJoueurs[nbrJoueur - 1].pseudo + ".");
                 do
                 {
                     mesJoueurs[0].jetonJoueur = mesJoueurs[0].jetonJoueur + 1;
@@ -285,7 +288,7 @@ namespace EliasEvrard5TI_421
             }
             else if (mesJoueurs[nbrJoueur - 1].score[1] == 116 || mesJoueurs[nbrJoueur - 1].score[1] == 666)
             {
-                Console.WriteLine(mesJoueurs[0].pseudo + "va recevoir 6 jetons de la part de " + mesJoueurs[nbrJoueur - 1].pseudo + ".");
+                Console.WriteLine(mesJoueurs[0].pseudo + " va recevoir 6 jetons de la part de " + mesJoueurs[nbrJoueur - 1].pseudo + ".");
                 do
                 {
                     mesJoueurs[0].jetonJoueur = mesJoueurs[0].jetonJoueur + 1;
@@ -295,7 +298,7 @@ namespace EliasEvrard5TI_421
             }
             else if (mesJoueurs[nbrJoueur - 1].score[1] == 115 || mesJoueurs[nbrJoueur - 1].score[1] == 555)
             {
-                Console.WriteLine(mesJoueurs[0].pseudo + "va recevoir 5 jetons de la part de " + mesJoueurs[nbrJoueur - 1].pseudo + ".");
+                Console.WriteLine(mesJoueurs[0].pseudo + " va recevoir 5 jetons de la part de " + mesJoueurs[nbrJoueur - 1].pseudo + ".");
                 do
                 {
                     mesJoueurs[0].jetonJoueur = mesJoueurs[0].jetonJoueur + 1;
@@ -305,7 +308,7 @@ namespace EliasEvrard5TI_421
             }
             else if (mesJoueurs[nbrJoueur - 1].score[1] == 114 || mesJoueurs[nbrJoueur - 1].score[1] == 444)
             {
-                Console.WriteLine(mesJoueurs[0].pseudo + "va recevoir 4 jetons de la part de " + mesJoueurs[nbrJoueur - 1].pseudo + ".");
+                Console.WriteLine(mesJoueurs[0].pseudo + " va recevoir 4 jetons de la part de " + mesJoueurs[nbrJoueur - 1].pseudo + ".");
                 do
                 {
                     mesJoueurs[0].jetonJoueur = mesJoueurs[0].jetonJoueur + 1;
@@ -315,7 +318,7 @@ namespace EliasEvrard5TI_421
             }
             else if (mesJoueurs[nbrJoueur - 1].score[1] == 113 || mesJoueurs[nbrJoueur - 1].score[1] == 333)
             {
-                Console.WriteLine(mesJoueurs[0].pseudo + "va recevoir 3 jetons de la part de " + mesJoueurs[nbrJoueur - 1].pseudo + ".");
+                Console.WriteLine(mesJoueurs[0].pseudo + " va recevoir 3 jetons de la part de " + mesJoueurs[nbrJoueur - 1].pseudo + ".");
                 do
                 {
                     mesJoueurs[0].jetonJoueur = mesJoueurs[0].jetonJoueur + 1;
@@ -325,7 +328,7 @@ namespace EliasEvrard5TI_421
             }
             else if (mesJoueurs[nbrJoueur - 1].score[1] == 112 || mesJoueurs[nbrJoueur - 1].score[1] == 222 || mesJoueurs[nbrJoueur - 1].score[1] == 654 || mesJoueurs[nbrJoueur - 1].score[1] == 543 || mesJoueurs[nbrJoueur - 1].score[1] == 432 || mesJoueurs[nbrJoueur - 1].score[1] == 321)
             {
-                Console.WriteLine(mesJoueurs[0].pseudo + "va recevoir 2 jetons de la part de " + mesJoueurs[nbrJoueur - 1].pseudo + ".");
+                Console.WriteLine(mesJoueurs[0].pseudo + " va recevoir 2 jetons de la part de " + mesJoueurs[nbrJoueur - 1].pseudo + ".");
                 do
                 {
                     mesJoueurs[0].jetonJoueur = mesJoueurs[0].jetonJoueur + 1;
@@ -335,7 +338,7 @@ namespace EliasEvrard5TI_421
             }
             else
             {
-                Console.WriteLine(mesJoueurs[0].pseudo + "va recevoir 1 jetons de la part de " + mesJoueurs[nbrJoueur - 1].pseudo + ".");
+                Console.WriteLine(mesJoueurs[0].pseudo + " va recevoir 1 jetons de la part de " + mesJoueurs[nbrJoueur - 1].pseudo + ".");
                     mesJoueurs[0].jetonJoueur = mesJoueurs[0].jetonJoueur + 1;
                     mesJoueurs[nbrJoueur - 1].jetonJoueur = mesJoueurs[nbrJoueur - 1].jetonJoueur - 1;
             }
@@ -344,51 +347,56 @@ namespace EliasEvrard5TI_421
 
         public void DonnerJetonCharge(int nbrJoueur, ref int jeton, ref Joueur[] mesJoueurs)
         {
+            int jetonDonner;
             if (mesJoueurs[nbrJoueur - 1].score[1] == 421)
             {
-                Console.WriteLine(mesJoueurs[0].pseudo + "va recevoir 10 jetons");
-                mesJoueurs[0].jetonJoueur = mesJoueurs[0].jetonJoueur + 10;
-                jeton = jeton - 10;
+                Console.WriteLine(mesJoueurs[0].pseudo + " va recevoir 10 jetons");
+                do
+                {
+                    mesJoueurs[0].jetonJoueur = mesJoueurs[0].jetonJoueur + 1;
+                    mesJoueurs[nbrJoueur - 1].jetonJoueur = mesJoueurs[nbrJoueur - 1].jetonJoueur - 1;
+                    jetonDonner = jetonDonner + 1;
+                } while (jetonDonner == 10 || );
             }
             else if (mesJoueurs[nbrJoueur - 1].score[1] == 111)
             {
-                Console.WriteLine(mesJoueurs[0].pseudo + "va recevoir 7 jetons");
+                Console.WriteLine(mesJoueurs[0].pseudo + " va recevoir 7 jetons");
                 mesJoueurs[0].jetonJoueur = mesJoueurs[0].jetonJoueur + 7;
                 jeton = jeton - 7;
             }
             else if (mesJoueurs[nbrJoueur - 1].score[1] == 116 || mesJoueurs[nbrJoueur - 1].score[1] == 666)
             {
-                Console.WriteLine(mesJoueurs[0].pseudo + "va recevoir 6 jetons");
+                Console.WriteLine(mesJoueurs[0].pseudo + " va recevoir 6 jetons");
                 mesJoueurs[0].jetonJoueur = mesJoueurs[0].jetonJoueur + 6;
                 jeton = jeton - 6;
             }
             else if (mesJoueurs[nbrJoueur - 1].score[1] == 115 || mesJoueurs[nbrJoueur - 1].score[1] == 555)
             {
-                Console.WriteLine(mesJoueurs[0].pseudo + "va recevoir 5 jetons");
+                Console.WriteLine(mesJoueurs[0].pseudo + " va recevoir 5 jetons");
                 mesJoueurs[0].jetonJoueur = mesJoueurs[0].jetonJoueur + 5;
                 jeton = jeton - 5;
             }
             else if (mesJoueurs[nbrJoueur - 1].score[1] == 114 || mesJoueurs[nbrJoueur - 1].score[1] == 444)
             {
-                Console.WriteLine(mesJoueurs[0].pseudo + "va recevoir 4 jetons");
+                Console.WriteLine(mesJoueurs[0].pseudo + " va recevoir 4 jetons");
                 mesJoueurs[0].jetonJoueur = mesJoueurs[0].jetonJoueur + 4;
                 jeton = jeton - 4;
             }
             else if (mesJoueurs[nbrJoueur - 1].score[1] == 113 || mesJoueurs[nbrJoueur - 1].score[1] == 333)
             {
-                Console.WriteLine(mesJoueurs[0].pseudo + "va recevoir 3 jetons");
+                Console.WriteLine(mesJoueurs[0].pseudo + " va recevoir 3 jetons");
                 mesJoueurs[0].jetonJoueur = mesJoueurs[0].jetonJoueur + 3;
                 jeton = jeton - 3;
             }
             else if (mesJoueurs[nbrJoueur - 1].score[1] == 112 || mesJoueurs[nbrJoueur - 1].score[1] == 222 || mesJoueurs[nbrJoueur - 1].score[1] == 654 || mesJoueurs[nbrJoueur - 1].score[1] == 543 || mesJoueurs[nbrJoueur - 1].score[1] == 432 || mesJoueurs[nbrJoueur - 1].score[1] == 321)
             {
-                Console.WriteLine(mesJoueurs[0].pseudo + "va recevoir 2 jetons");
+                Console.WriteLine(mesJoueurs[0].pseudo + " va recevoir 2 jetons");
                 mesJoueurs[0].jetonJoueur = mesJoueurs[0].jetonJoueur + 2;
                 jeton = jeton - 2;
             }
             else
             {
-                Console.WriteLine(mesJoueurs[0].pseudo + "va recevoir 1 jeton");
+                Console.WriteLine(mesJoueurs[0].pseudo + " va recevoir 1 jeton");
                 mesJoueurs[0].jetonJoueur = mesJoueurs[0].jetonJoueur + 1;
                 jeton = jeton - 1;
             }
