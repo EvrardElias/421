@@ -81,6 +81,7 @@ namespace EliasEvrard5TI_421
         public void LaCharge(int nbrJoueur, ref Joueur[] mesJoueurs)
         {
             int jeton = 21;
+            bool recommencerCharge;
             do
             {
                 for (int compteurJoueur = 0; compteurJoueur < nbrJoueur; compteurJoueur++)
@@ -95,7 +96,15 @@ namespace EliasEvrard5TI_421
                 }
                 mesJoueurs = mesJoueurs.OrderByDescending(joueur => joueur.score.Max()).ToArray();
                 DonnerJetonCharge(nbrJoueur, ref jeton, ref mesJoueurs);
-            } while (jeton != 0);
+                if (jeton == 0)
+                {
+                    recommencerCharge = true;
+                }
+                else
+                {
+                    recommencerCharge = false;
+                }
+            } while (recommencerCharge == false);
         }
 
         public void LaDecharge(int nbrJoueur, ref Joueur[] mesJoueurs)
@@ -253,7 +262,7 @@ namespace EliasEvrard5TI_421
                 }
                 else if (changer == "Non")
                 {
-                    for (int compteur = 0; compteur <= 3; compteur++)
+                    for (int compteur = 0; compteur < 3; compteur++)
                     {
                         mesJoueurs[lanceur].score[compteur] = desRelancer.Next(1, 7);
                     }
@@ -270,13 +279,13 @@ namespace EliasEvrard5TI_421
         public void DonnerJetonDeharge(int nbrJoueur, ref Joueur[] mesJoueurs)
         {
             int jetonDonner = 0;
-            if (mesJoueurs[nbrJoueur - 1].score[1] == 421)
+            if (mesJoueurs[nbrJoueur - 1].score[0] == 4 && mesJoueurs[nbrJoueur - 1].score[1] == 2 && mesJoueurs[nbrJoueur - 1].score[2] == 1)
             {
                 Console.WriteLine(mesJoueurs[0].pseudo + " va recevoir tout les jetons de " + mesJoueurs[nbrJoueur - 1].pseudo + ".");
                 mesJoueurs[0].jetonJoueur = mesJoueurs[0].jetonJoueur + mesJoueurs[nbrJoueur - 1].jetonJoueur;
                 mesJoueurs[nbrJoueur - 1].jetonJoueur = 0;
             }
-            else if (mesJoueurs[nbrJoueur - 1].score[1] == 111)
+            else if (mesJoueurs[nbrJoueur - 1].score[0] == 1 && mesJoueurs[nbrJoueur - 1].score[1] == 1 && mesJoueurs[nbrJoueur - 1].score[2] == 1)
             {
                 Console.WriteLine(mesJoueurs[0].pseudo + " va recevoir 7 jetons de la part de " + mesJoueurs[nbrJoueur - 1].pseudo + ".");
                 do
@@ -284,9 +293,9 @@ namespace EliasEvrard5TI_421
                     mesJoueurs[0].jetonJoueur = mesJoueurs[0].jetonJoueur + 1;
                     mesJoueurs[nbrJoueur - 1].jetonJoueur = mesJoueurs[nbrJoueur - 1].jetonJoueur - 1;
                     jetonDonner = jetonDonner + 1;
-                } while (jetonDonner == 7 || mesJoueurs[nbrJoueur - 1].jetonJoueur == 0);
+                } while (jetonDonner <= 7 && mesJoueurs[nbrJoueur - 1].jetonJoueur == 0);
             }
-            else if (mesJoueurs[nbrJoueur - 1].score[1] == 116 || mesJoueurs[nbrJoueur - 1].score[1] == 666)
+            else if (mesJoueurs[nbrJoueur - 1].score[0] == 6 && mesJoueurs[nbrJoueur - 1].score[1] == 1 && mesJoueurs[nbrJoueur - 1].score[2] == 1 || mesJoueurs[nbrJoueur - 1].score[0] == 6 && mesJoueurs[nbrJoueur - 1].score[1] == 6 && mesJoueurs[nbrJoueur - 1].score[2] == 6)
             {
                 Console.WriteLine(mesJoueurs[0].pseudo + " va recevoir 6 jetons de la part de " + mesJoueurs[nbrJoueur - 1].pseudo + ".");
                 do
@@ -294,9 +303,9 @@ namespace EliasEvrard5TI_421
                     mesJoueurs[0].jetonJoueur = mesJoueurs[0].jetonJoueur + 1;
                     mesJoueurs[nbrJoueur - 1].jetonJoueur = mesJoueurs[nbrJoueur - 1].jetonJoueur - 1;
                     jetonDonner = jetonDonner + 1;
-                } while (jetonDonner == 6 || mesJoueurs[nbrJoueur - 1].jetonJoueur == 0);
+                } while (jetonDonner <= 6 && mesJoueurs[nbrJoueur - 1].jetonJoueur == 0);
             }
-            else if (mesJoueurs[nbrJoueur - 1].score[1] == 115 || mesJoueurs[nbrJoueur - 1].score[1] == 555)
+            else if (mesJoueurs[nbrJoueur - 1].score[0] == 5 && mesJoueurs[nbrJoueur - 1].score[1] == 1 && mesJoueurs[nbrJoueur - 1].score[2] == 1 || mesJoueurs[nbrJoueur - 1].score[0] == 5 && mesJoueurs[nbrJoueur - 1].score[1] == 5 && mesJoueurs[nbrJoueur - 1].score[2] == 5)
             {
                 Console.WriteLine(mesJoueurs[0].pseudo + " va recevoir 5 jetons de la part de " + mesJoueurs[nbrJoueur - 1].pseudo + ".");
                 do
@@ -304,9 +313,9 @@ namespace EliasEvrard5TI_421
                     mesJoueurs[0].jetonJoueur = mesJoueurs[0].jetonJoueur + 1;
                     mesJoueurs[nbrJoueur - 1].jetonJoueur = mesJoueurs[nbrJoueur - 1].jetonJoueur - 1;
                     jetonDonner = jetonDonner + 1;
-                } while (jetonDonner == 5 || mesJoueurs[nbrJoueur - 1].jetonJoueur == 0);
+                } while (jetonDonner <= 5 && mesJoueurs[nbrJoueur - 1].jetonJoueur == 0);
             }
-            else if (mesJoueurs[nbrJoueur - 1].score[1] == 114 || mesJoueurs[nbrJoueur - 1].score[1] == 444)
+            else if (mesJoueurs[nbrJoueur - 1].score[0] == 4 && mesJoueurs[nbrJoueur - 1].score[1] == 1 && mesJoueurs[nbrJoueur - 1].score[2] == 1 || mesJoueurs[nbrJoueur - 1].score[0] == 4 && mesJoueurs[nbrJoueur - 1].score[1] == 4 && mesJoueurs[nbrJoueur - 1].score[2] == 4)
             {
                 Console.WriteLine(mesJoueurs[0].pseudo + " va recevoir 4 jetons de la part de " + mesJoueurs[nbrJoueur - 1].pseudo + ".");
                 do
@@ -314,9 +323,9 @@ namespace EliasEvrard5TI_421
                     mesJoueurs[0].jetonJoueur = mesJoueurs[0].jetonJoueur + 1;
                     mesJoueurs[nbrJoueur - 1].jetonJoueur = mesJoueurs[nbrJoueur - 1].jetonJoueur - 1;
                     jetonDonner = jetonDonner + 1;
-                } while (jetonDonner == 4 || mesJoueurs[nbrJoueur - 1].jetonJoueur == 0);
+                } while (jetonDonner <= 4 && mesJoueurs[nbrJoueur - 1].jetonJoueur == 0);
             }
-            else if (mesJoueurs[nbrJoueur - 1].score[1] == 113 || mesJoueurs[nbrJoueur - 1].score[1] == 333)
+            else if (mesJoueurs[nbrJoueur - 1].score[0] == 3 && mesJoueurs[nbrJoueur - 1].score[1] == 1 && mesJoueurs[nbrJoueur - 1].score[2] == 1 || mesJoueurs[nbrJoueur - 1].score[0] == 3 && mesJoueurs[nbrJoueur - 1].score[1] == 3 && mesJoueurs[nbrJoueur - 1].score[2] == 3)
             {
                 Console.WriteLine(mesJoueurs[0].pseudo + " va recevoir 3 jetons de la part de " + mesJoueurs[nbrJoueur - 1].pseudo + ".");
                 do
@@ -324,9 +333,9 @@ namespace EliasEvrard5TI_421
                     mesJoueurs[0].jetonJoueur = mesJoueurs[0].jetonJoueur + 1;
                     mesJoueurs[nbrJoueur - 1].jetonJoueur = mesJoueurs[nbrJoueur - 1].jetonJoueur - 1;
                     jetonDonner = jetonDonner + 1;
-                } while (jetonDonner == 3 || mesJoueurs[nbrJoueur - 1].jetonJoueur == 0);
+                } while (jetonDonner <= 3 && mesJoueurs[nbrJoueur - 1].jetonJoueur == 0);
             }
-            else if (mesJoueurs[nbrJoueur - 1].score[1] == 112 || mesJoueurs[nbrJoueur - 1].score[1] == 222 || mesJoueurs[nbrJoueur - 1].score[1] == 654 || mesJoueurs[nbrJoueur - 1].score[1] == 543 || mesJoueurs[nbrJoueur - 1].score[1] == 432 || mesJoueurs[nbrJoueur - 1].score[1] == 321)
+            else if (mesJoueurs[nbrJoueur - 1].score[0] == 2 && mesJoueurs[nbrJoueur - 1].score[1] == 1 && mesJoueurs[nbrJoueur - 1].score[2] == 1 || mesJoueurs[nbrJoueur - 1].score[0] == 2 && mesJoueurs[nbrJoueur - 1].score[1] == 2 && mesJoueurs[nbrJoueur - 1].score[2] == 2 || mesJoueurs[nbrJoueur - 1].score[0] == 6 && mesJoueurs[nbrJoueur - 1].score[1] == 5 && mesJoueurs[nbrJoueur - 1].score[2] == 4 || mesJoueurs[nbrJoueur - 1].score[0] == 5 && mesJoueurs[nbrJoueur - 1].score[1] == 4 && mesJoueurs[nbrJoueur - 1].score[2] == 3 || mesJoueurs[nbrJoueur - 1].score[0] == 4 && mesJoueurs[nbrJoueur - 1].score[1] == 3 && mesJoueurs[nbrJoueur - 1].score[2] == 2 || mesJoueurs[nbrJoueur - 1].score[0] == 3 && mesJoueurs[nbrJoueur - 1].score[1] == 2 && mesJoueurs[nbrJoueur - 1].score[2] == 1)
             {
                 Console.WriteLine(mesJoueurs[0].pseudo + " va recevoir 2 jetons de la part de " + mesJoueurs[nbrJoueur - 1].pseudo + ".");
                 do
@@ -334,7 +343,7 @@ namespace EliasEvrard5TI_421
                     mesJoueurs[0].jetonJoueur = mesJoueurs[0].jetonJoueur + 1;
                     mesJoueurs[nbrJoueur - 1].jetonJoueur = mesJoueurs[nbrJoueur - 1].jetonJoueur - 1;
                     jetonDonner = jetonDonner + 1;
-                } while (jetonDonner == 2 || mesJoueurs[nbrJoueur - 1].jetonJoueur == 0);
+                } while (jetonDonner <= 2 && mesJoueurs[nbrJoueur - 1].jetonJoueur == 0);
             }
             else
             {
@@ -347,58 +356,83 @@ namespace EliasEvrard5TI_421
 
         public void DonnerJetonCharge(int nbrJoueur, ref int jeton, ref Joueur[] mesJoueurs)
         {
-            int jetonDonner;
-            if (mesJoueurs[nbrJoueur - 1].score[1] == 421)
+            int jetonDonner = 0;
+            if (mesJoueurs[nbrJoueur - 1].score[0] == 4 && mesJoueurs[nbrJoueur - 1].score[1] == 2 && mesJoueurs[nbrJoueur - 1].score[2] == 1)
             {
                 Console.WriteLine(mesJoueurs[0].pseudo + " va recevoir 10 jetons");
                 do
                 {
                     mesJoueurs[0].jetonJoueur = mesJoueurs[0].jetonJoueur + 1;
-                    mesJoueurs[nbrJoueur - 1].jetonJoueur = mesJoueurs[nbrJoueur - 1].jetonJoueur - 1;
+                    jeton = jeton - 1;
                     jetonDonner = jetonDonner + 1;
-                } while (jetonDonner == 10 || );
+                } while (jeton > 0 && jetonDonner <= 10);
             }
-            else if (mesJoueurs[nbrJoueur - 1].score[1] == 111)
+            else if (mesJoueurs[nbrJoueur - 1].score[0] == 1 && mesJoueurs[nbrJoueur - 1].score[1] == 1 && mesJoueurs[nbrJoueur - 1].score[2] == 1)
             {
                 Console.WriteLine(mesJoueurs[0].pseudo + " va recevoir 7 jetons");
-                mesJoueurs[0].jetonJoueur = mesJoueurs[0].jetonJoueur + 7;
-                jeton = jeton - 7;
+                do
+                {
+                    mesJoueurs[0].jetonJoueur = mesJoueurs[0].jetonJoueur + 1;
+                    jeton = jeton - 1;
+                    jetonDonner = jetonDonner + 1;
+                } while (jeton > 0 && jetonDonner <= 7);
             }
-            else if (mesJoueurs[nbrJoueur - 1].score[1] == 116 || mesJoueurs[nbrJoueur - 1].score[1] == 666)
+            else if (mesJoueurs[nbrJoueur - 1].score[0] == 6 && mesJoueurs[nbrJoueur - 1].score[1] == 1 && mesJoueurs[nbrJoueur - 1].score[2] == 1 || mesJoueurs[nbrJoueur - 1].score[0] == 6 && mesJoueurs[nbrJoueur - 1].score[1] == 6 && mesJoueurs[nbrJoueur - 1].score[2] == 6)
             {
                 Console.WriteLine(mesJoueurs[0].pseudo + " va recevoir 6 jetons");
-                mesJoueurs[0].jetonJoueur = mesJoueurs[0].jetonJoueur + 6;
-                jeton = jeton - 6;
+                do
+                {
+                    mesJoueurs[0].jetonJoueur = mesJoueurs[0].jetonJoueur + 1;
+                    jeton = jeton - 1;
+                    jetonDonner = jetonDonner + 1;
+                } while (jeton > 0 && jetonDonner <= 6);
             }
-            else if (mesJoueurs[nbrJoueur - 1].score[1] == 115 || mesJoueurs[nbrJoueur - 1].score[1] == 555)
+            else if (mesJoueurs[nbrJoueur - 1].score[0] == 5 && mesJoueurs[nbrJoueur - 1].score[1] == 1 && mesJoueurs[nbrJoueur - 1].score[2] == 1 || mesJoueurs[nbrJoueur - 1].score[0] == 5 && mesJoueurs[nbrJoueur - 1].score[1] == 5 && mesJoueurs[nbrJoueur - 1].score[2] == 5)
             {
                 Console.WriteLine(mesJoueurs[0].pseudo + " va recevoir 5 jetons");
-                mesJoueurs[0].jetonJoueur = mesJoueurs[0].jetonJoueur + 5;
-                jeton = jeton - 5;
+                do
+                {
+                    mesJoueurs[0].jetonJoueur = mesJoueurs[0].jetonJoueur + 1;
+                    jeton = jeton - 1;
+                    jetonDonner = jetonDonner + 1;
+                } while (jeton > 0 && jetonDonner <= 5);
             }
-            else if (mesJoueurs[nbrJoueur - 1].score[1] == 114 || mesJoueurs[nbrJoueur - 1].score[1] == 444)
+            else if (mesJoueurs[nbrJoueur - 1].score[0] == 4 && mesJoueurs[nbrJoueur - 1].score[1] == 1 && mesJoueurs[nbrJoueur - 1].score[2] == 1 || mesJoueurs[nbrJoueur - 1].score[0] == 4 && mesJoueurs[nbrJoueur - 1].score[1] == 4 && mesJoueurs[nbrJoueur - 1].score[2] == 4)
             {
                 Console.WriteLine(mesJoueurs[0].pseudo + " va recevoir 4 jetons");
-                mesJoueurs[0].jetonJoueur = mesJoueurs[0].jetonJoueur + 4;
-                jeton = jeton - 4;
+                do
+                {
+                    mesJoueurs[0].jetonJoueur = mesJoueurs[0].jetonJoueur + 1;
+                    jeton = jeton - 1;
+                    jetonDonner = jetonDonner + 1;
+                } while (jeton > 0 && jetonDonner <= 4);
             }
-            else if (mesJoueurs[nbrJoueur - 1].score[1] == 113 || mesJoueurs[nbrJoueur - 1].score[1] == 333)
+            else if (mesJoueurs[nbrJoueur - 1].score[0] == 3 && mesJoueurs[nbrJoueur - 1].score[1] == 1 && mesJoueurs[nbrJoueur - 1].score[2] == 1 || mesJoueurs[nbrJoueur - 1].score[0] == 3 && mesJoueurs[nbrJoueur - 1].score[1] == 3 && mesJoueurs[nbrJoueur - 1].score[2] == 3)
             {
                 Console.WriteLine(mesJoueurs[0].pseudo + " va recevoir 3 jetons");
-                mesJoueurs[0].jetonJoueur = mesJoueurs[0].jetonJoueur + 3;
-                jeton = jeton - 3;
+                do
+                {
+                    mesJoueurs[0].jetonJoueur = mesJoueurs[0].jetonJoueur + 1;
+                    jeton = jeton - 1;
+                    jetonDonner = jetonDonner + 1;
+                } while (jeton > 0 && jetonDonner <= 3);
             }
-            else if (mesJoueurs[nbrJoueur - 1].score[1] == 112 || mesJoueurs[nbrJoueur - 1].score[1] == 222 || mesJoueurs[nbrJoueur - 1].score[1] == 654 || mesJoueurs[nbrJoueur - 1].score[1] == 543 || mesJoueurs[nbrJoueur - 1].score[1] == 432 || mesJoueurs[nbrJoueur - 1].score[1] == 321)
+            else if (mesJoueurs[nbrJoueur - 1].score[0] == 2 && mesJoueurs[nbrJoueur - 1].score[1] == 1 && mesJoueurs[nbrJoueur - 1].score[2] == 1 || mesJoueurs[nbrJoueur - 1].score[0] == 2 && mesJoueurs[nbrJoueur - 1].score[1] == 2 && mesJoueurs[nbrJoueur - 1].score[2] == 2 || mesJoueurs[nbrJoueur - 1].score[0] == 6 && mesJoueurs[nbrJoueur - 1].score[1] == 5 && mesJoueurs[nbrJoueur - 1].score[2] == 4 || mesJoueurs[nbrJoueur - 1].score[0] == 5 && mesJoueurs[nbrJoueur - 1].score[1] == 4 && mesJoueurs[nbrJoueur - 1].score[2] == 3 || mesJoueurs[nbrJoueur - 1].score[0] == 4 && mesJoueurs[nbrJoueur - 1].score[1] == 3 && mesJoueurs[nbrJoueur - 1].score[2] == 2 || mesJoueurs[nbrJoueur - 1].score[0] == 3 && mesJoueurs[nbrJoueur - 1].score[1] == 2 && mesJoueurs[nbrJoueur - 1].score[2] == 1)
             {
                 Console.WriteLine(mesJoueurs[0].pseudo + " va recevoir 2 jetons");
-                mesJoueurs[0].jetonJoueur = mesJoueurs[0].jetonJoueur + 2;
-                jeton = jeton - 2;
+                do
+                {
+                    mesJoueurs[0].jetonJoueur = mesJoueurs[0].jetonJoueur + 1;
+                    jeton = jeton - 1;
+                    jetonDonner = jetonDonner + 1;
+                } while (jeton > 0 && jetonDonner <= 2);
             }
             else
             {
                 Console.WriteLine(mesJoueurs[0].pseudo + " va recevoir 1 jeton");
                 mesJoueurs[0].jetonJoueur = mesJoueurs[0].jetonJoueur + 1;
                 jeton = jeton - 1;
+                jetonDonner = jetonDonner + 1;
             }
         }
         
